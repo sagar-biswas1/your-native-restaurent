@@ -6,6 +6,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 import LoginScreen from "./screens/LoginScreen";
 import HomeScreen from "./screens/HomeScreen";
+import SingleMealScreen from "./screens/SingleMealScreen";
 const Stack = createStackNavigator();
 
 const globalScreenOptions = {
@@ -18,12 +19,9 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={globalScreenOptions}>
-        {/* <Stack.Screen name="Home" component={HomeScreen} /> */}
-        <Stack.Screen
-          //  options={{ title: "sign-up" }}
-          name="Login"
-          component={LoginScreen}
-        />
+        <Stack.Screen name="Login" component={LoginScreen} />
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Details" component={SingleMealScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
