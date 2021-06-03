@@ -7,7 +7,7 @@ export default function SingleMealScreen({ navigation, route }) {
   console.log(itemId, otherParam);
   return (
     <View>
-      <Text>this is single product </Text>
+      <Text>this is single product . .....</Text>
     </View>
   );
 }
