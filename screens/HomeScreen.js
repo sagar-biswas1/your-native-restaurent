@@ -27,7 +27,7 @@ export default function HomeScreen({ navigation }) {
 
   return isDisplayContent ? (
     <View>
-      <Text>this is home screen </Text>
+      <Text>this is home screen ...</Text>
 
       <View>
         <MealCard navigation={navigation} />{" "}
