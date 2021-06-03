@@ -7,6 +7,11 @@ import { NavigationContainer } from "@react-navigation/native";
 import LoginScreen from "./screens/LoginScreen";
 import HomeScreen from "./screens/HomeScreen";
 import SingleMealScreen from "./screens/SingleMealScreen";
+import { Provider } from "react-redux";
+import store from "./redux/store";
+
+import "firebase/auth";
+
 const Stack = createStackNavigator();
 
 const globalScreenOptions = {
@@ -15,15 +20,33 @@ const globalScreenOptions = {
   headerTintColor: { color: "white" },
 };
 
-export default function App() {
+function App() {
+  //const dispatch = useDispatch();
+  // useEffect(() => {
+  //   const unsubscribe = firebase.auth().onAuthStateChanged(function (user) {
+  //     if (user) {
+  //       let userDetails = {
+  //         name: user.displayName,
+  //         email: user.email,
+  //         photo: user.photoURL,
+  //       };
+  //       dispatch(setUser(userDetails));
+  //     }
+  //   });
+
+  //   return unsubscribe;
+  // }, [dispatch]);
+
   return (
-    <NavigationContainer>
-      <Stack.Navigator screenOptions={globalScreenOptions}>
-        <Stack.Screen name="Login" component={LoginScreen} />
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Details" component={SingleMealScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <Stack.Navigator screenOptions={globalScreenOptions}>
+          <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="Login" component={LoginScreen} />
+          <Stack.Screen name="Details" component={SingleMealScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
 }
 
@@ -35,3 +58,5 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
+
+export default App;

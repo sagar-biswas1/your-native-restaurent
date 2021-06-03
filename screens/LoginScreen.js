@@ -4,19 +4,28 @@ import { StyleSheet, Text, View } from "react-native";
 import { Button, Input, Image } from "react-native-elements";
 import firebase from "firebase";
 import firebaseConfig from "../firebase";
-
+import { useDispatch } from "react-redux";
+import { setUser } from "../redux/actions/LoginActions";
 if (firebase.apps.length === 0) {
   firebase.initializeApp(firebaseConfig);
 }
 export default function LoginScreen({ navigation }) {
+  const dispatch = useDispatch();
+
   var provider = new firebase.auth.GoogleAuthProvider();
   const handleGoogleLogin = () => {
     firebase
       .auth()
       .signInWithPopup(provider)
       .then((result) => {
-        var user = result.user;
-        console.log(user);
+        const { displayName, email, photoURL } = result.user;
+        let userDetails = {
+          name: displayName,
+          email: email,
+          photo: photoURL,
+        };
+
+        dispatch(setUser(userDetails));
       })
       .catch((error) => {
         console.log(error);
