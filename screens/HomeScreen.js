@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { setUser } from "../redux/actions/LoginActions";
 export default function HomeScreen({ navigation }) {
   const [isDisplayContent, setIsDisplayContent] = useState(false);
-  const dispatch = useDispatch();
+    const dispatch = useDispatch();
   useEffect(() => {
     const unsubscribe = firebase.auth().onAuthStateChanged(function (user) {
       if (user) {
@@ -27,14 +27,14 @@ export default function HomeScreen({ navigation }) {
 
   return isDisplayContent ? (
     <View>
-      <Text>this is home screen ...</Text>
+      <Text>hlw</Text>
 
       <View>
         <MealCard navigation={navigation} />{" "}
       </View>
     </View>
   ) : (
-    "Authenticating.... "
+    "Authenticating...."
   );
 }
 
