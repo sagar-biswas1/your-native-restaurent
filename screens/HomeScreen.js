@@ -4,10 +4,23 @@ import MealCard from "../components/MealCard";
 import firebase from "firebase/app";
 import { useDispatch } from "react-redux";
 import { setUser } from "../redux/actions/LoginActions";
+
+
+
 export default function HomeScreen({ navigation }) {
+
   const [isDisplayContent, setIsDisplayContent] = useState(false);
-    const dispatch = useDispatch();
+  const [card, srtCard] = useState();
+  const dispatch = useDispatch();
   useEffect(() => {
+
+    fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=Arrabiata')
+    .then(res => res.json())
+    .then(data => srtCard(data))
+
+    console.log("ok")
+
+    //api
     const unsubscribe = firebase.auth().onAuthStateChanged(function (user) {
       if (user) {
         let userDetails = {
@@ -34,7 +47,7 @@ export default function HomeScreen({ navigation }) {
       </View>
     </View>
   ) : (
-    "Authenticating...."
+    "Authenticating.... ok"
   );
 }
 
