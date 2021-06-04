@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Button, StyleSheet, Text, View } from "react-native";
+import { Button, StyleSheet, Text, View, ScrollView } from "react-native";
 import MealCard from "../components/MealCard";
 import firebase from "firebase/app";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../redux/actions/LoginActions";
+import { loadAllMeals } from "../redux/actions/productActions";
 export default function HomeScreen({ navigation }) {
+  const userData = useSelector((state) => state.userData.userDetails);
+  const products = useSelector((state) => state.products.allProducts);
   const [isDisplayContent, setIsDisplayContent] = useState(false);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -16,6 +19,7 @@ export default function HomeScreen({ navigation }) {
           photo: user.photoURL,
         };
         dispatch(setUser(userDetails));
+        dispatch(loadAllMeals());
         setIsDisplayContent(true);
       } else {
         navigation.push("Login");
@@ -25,13 +29,21 @@ export default function HomeScreen({ navigation }) {
     return unsubscribe;
   }, [dispatch]);
 
-  return (
-    <View>
-      <Text>this is home screen ...</Text>
+  return userData.email ? (
+    <ScrollView>
+      {products.map((product) => (
+        <MealCard
+          navigation={navigation}
+          key={product.idMeal}
+          product={product}
+        />
+      ))}
 
-      <View>
-        <MealCard navigation={navigation} />{" "}
-      </View>
+      {/* <MealCard navigation={navigation} />{" "} */}
+    </ScrollView>
+  ) : (
+    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      Authenticating....
     </View>
   );
 }

@@ -16,7 +16,7 @@ const LogoutScreen = () => {
       .signOut()
       .then(() => {
         console.log("log out successfully");
-        dispatch(logoutUser);
+        dispatch(logoutUser());
         navigation.navigate("Login");
       })
       .catch((error) => {
