@@ -51,6 +51,7 @@ export default function LoginScreen({ navigation }) {
         />
       </View>
       <Button
+        style={{ width: 250, marginTop: 15 }}
         title="Go to home page"
         type="outline"
         onPress={() => navigation.navigate("Home")}

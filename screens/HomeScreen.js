@@ -8,10 +8,10 @@ import { loadAllMeals } from "../redux/actions/productActions";
 export default function HomeScreen({ navigation }) {
   const userData = useSelector((state) => state.userData.userDetails);
   const products = useSelector((state) => state.products.allProducts);
-  const [isDisplayContent, setIsDisplayContent] = useState(false);
+
   const dispatch = useDispatch();
   useEffect(() => {
-    const unsubscribe = firebase.auth().onAuthStateChanged(function (user) {
+    firebase.auth().onAuthStateChanged(function (user) {
       if (user) {
         let userDetails = {
           name: user.displayName,
@@ -20,16 +20,27 @@ export default function HomeScreen({ navigation }) {
         };
         dispatch(setUser(userDetails));
         dispatch(loadAllMeals());
-        setIsDisplayContent(true);
       } else {
         navigation.push("Login");
       }
     });
-
-    return unsubscribe;
   }, [dispatch]);
 
-  return userData.email ? (
+  if (!userData.email) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <Button
+          title="Please login first"
+          onPress={() => {
+            /* 1. Navigate to the Details route with params */
+            navigation.navigate("Login");
+          }}
+        />{" "}
+      </View>
+    );
+  }
+
+  return (
     <ScrollView>
       {products.map((product) => (
         <MealCard
@@ -41,10 +52,6 @@ export default function HomeScreen({ navigation }) {
 
       {/* <MealCard navigation={navigation} />{" "} */}
     </ScrollView>
-  ) : (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      Authenticating....
-    </View>
   );
 }
 

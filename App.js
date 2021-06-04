@@ -38,6 +38,7 @@ const StackScreens = () => {
     return (
       <Stack.Navigator screenOptions={globalScreenOptions}>
         <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Login" component={LoginScreen} />
       </Stack.Navigator>
     );
   }
