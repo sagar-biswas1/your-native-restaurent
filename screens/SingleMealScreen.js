@@ -3,7 +3,6 @@ import { StyleSheet, Text, View } from "react-native";
 
 export default function SingleMealScreen({ navigation, route }) {
   const { itemId, otherParam } = route.params;
-
   console.log(itemId, otherParam);
   return (
     <View>

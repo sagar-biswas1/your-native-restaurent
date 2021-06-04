@@ -8,7 +8,13 @@ const loginReducers = (state = initialState, action) => {
       const newState = { ...state, userDetails: action.payload };
       return newState;
     }
-
+    case "USER_LOGOUT": {
+      const newState = {
+        ...state,
+        userDetails: { name: "", email: "", photo: "" },
+      };
+      return newState;
+    }
     default:
       return state;
   }

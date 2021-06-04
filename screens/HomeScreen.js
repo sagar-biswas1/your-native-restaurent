@@ -25,7 +25,7 @@ export default function HomeScreen({ navigation }) {
     return unsubscribe;
   }, [dispatch]);
 
-  return isDisplayContent ? (
+  return (
     <View>
       <Text>this is home screen ...</Text>
 
@@ -33,8 +33,6 @@ export default function HomeScreen({ navigation }) {
         <MealCard navigation={navigation} />{" "}
       </View>
     </View>
-  ) : (
-    "Authenticating.... "
   );
 }
 

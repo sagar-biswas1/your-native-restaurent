@@ -26,6 +26,7 @@ export default function LoginScreen({ navigation }) {
         };
 
         dispatch(setUser(userDetails));
+        navigation.push("Home");
       })
       .catch((error) => {
         console.log(error);
