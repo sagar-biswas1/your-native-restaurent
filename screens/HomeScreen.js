@@ -1,27 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { Button, StyleSheet, Text, View } from "react-native";
+import { Button, StyleSheet, Text, View, ScrollView } from "react-native";
 import MealCard from "../components/MealCard";
 import firebase from "firebase/app";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../redux/actions/LoginActions";
-
-
-
+import { loadAllMeals } from "../redux/actions/productActions";
 export default function HomeScreen({ navigation }) {
+  const userData = useSelector((state) => state.userData.userDetails);
+  const products = useSelector((state) => state.products.allProducts);
 
-  const [isDisplayContent, setIsDisplayContent] = useState(false);
-  const [card, srtCard] = useState();
   const dispatch = useDispatch();
   useEffect(() => {
-
-    fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=Arrabiata')
-    .then(res => res.json())
-    .then(data => srtCard(data))
-
-    console.log("ok")
-
-    //api
-    const unsubscribe = firebase.auth().onAuthStateChanged(function (user) {
+    firebase.auth().onAuthStateChanged(function (user) {
       if (user) {
         let userDetails = {
           name: user.displayName,
@@ -29,25 +19,39 @@ export default function HomeScreen({ navigation }) {
           photo: user.photoURL,
         };
         dispatch(setUser(userDetails));
-        setIsDisplayContent(true);
+        dispatch(loadAllMeals());
       } else {
         navigation.push("Login");
       }
     });
-
-    return unsubscribe;
   }, [dispatch]);
 
-  return isDisplayContent ? (
-    <View>
-      <Text>hlw</Text>
-
-      <View>
-        <MealCard navigation={navigation} />{" "}
+  if (!userData.email) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <Button
+          title="Please login first"
+          onPress={() => {
+            /* 1. Navigate to the Details route with params */
+            navigation.navigate("Login");
+          }}
+        />{" "}
       </View>
-    </View>
-  ) : (
-    "Authenticating.... ok"
+    );
+  }
+
+  return (
+    <ScrollView>
+      {products.map((product) => (
+        <MealCard
+          navigation={navigation}
+          key={product.idMeal}
+          product={product}
+        />
+      ))}
+
+      {/* <MealCard navigation={navigation} />{" "} */}
+    </ScrollView>
   );
 }
 

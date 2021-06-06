@@ -26,6 +26,7 @@ export default function LoginScreen({ navigation }) {
         };
 
         dispatch(setUser(userDetails));
+        navigation.push("Home");
       })
       .catch((error) => {
         console.log(error);
@@ -42,7 +43,7 @@ export default function LoginScreen({ navigation }) {
             uri: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/2048px-Google_%22G%22_Logo.svg.png",
           }}
           style={{ width: 50, height: 50, marginRight: "10px" }}
-        />
+        /> <br /> <br />
         <Button
           title="Login with Google"
           type="outline"
@@ -50,7 +51,8 @@ export default function LoginScreen({ navigation }) {
         />
       </View>
       <Button
-        title="Go to home page hi "
+        style={{ width: 250, marginTop: 15 }}
+        title="Go to home page"
         type="outline"
         onPress={() => navigation.navigate("Home")}
       />
