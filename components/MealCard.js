@@ -27,7 +27,7 @@ export default function MealCard({ navigation, product }) {
           <View>
             <Text 
             style={{
-              fontSize: '18px',
+              fontSize: '20px',
               fontWeight: '600'
             }}
             >{strMeal.slice(0, 20)}</Text>
