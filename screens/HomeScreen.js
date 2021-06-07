@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, StyleSheet, Text, View, ScrollView } from "react-native";
+import { Button, StyleSheet, Text, View, ScrollView, Image } from "react-native";
 import MealCard from "../components/MealCard";
 import firebase from "firebase/app";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,6 +8,7 @@ import { loadAllMeals } from "../redux/actions/productActions";
 export default function HomeScreen({ navigation }) {
   const userData = useSelector((state) => state.userData.userDetails);
   const products = useSelector((state) => state.products.allProducts);
+
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -29,8 +30,18 @@ export default function HomeScreen({ navigation }) {
   if (!userData.email) {
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+
+        <Image
+          source={{
+            uri: "https://i.ibb.co/jDhrLZY/attachment-101809364-removebg-preview.png",
+          }}
+          style={{ width: 250, height: 150, marginRight: "10px" }}
+        /> <br />
+
         <Button
-          title="Please login first"
+          style={{ backgroundColor: '#FFC300', borderRadius: '8px', borderColor: 'red' }}
+          title="Hi! Please login "
+          type="outline"
           onPress={() => {
             /* 1. Navigate to the Details route with params */
             navigation.navigate("Login");
@@ -55,4 +66,7 @@ export default function HomeScreen({ navigation }) {
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+
+
+});
