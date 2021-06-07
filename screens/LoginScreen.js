@@ -37,21 +37,32 @@ export default function LoginScreen({ navigation }) {
     <View style={styles.container}>
       <StatusBar style="light" />
 
+      <Image
+        source={{
+          uri: "https://i.ibb.co/jDhrLZY/attachment-101809364-removebg-preview.png",
+        }}
+        style={{ width: 250, height: 100, marginRight: "10px" }}
+      /> <br />
+
       <View style={styles.inputContainer}>
-        <Image
+        {/* <Image
           source={{
             uri: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/2048px-Google_%22G%22_Logo.svg.png",
           }}
           style={{ width: 50, height: 50, marginRight: "10px" }}
-        />
+        /> */}
+
         <Button
+
+
+          style={{ backgroundColor: '#FFC300', borderRadius: '8px', borderColor: 'red' }}
           title="Login with Google"
           type="outline"
           onPress={handleGoogleLogin}
         />
       </View>
       <Button
-        style={{ width: 250, marginTop: 15 }}
+        style={{ width: 250, marginTop: 15, borderRadius: "8px", backgroundColor: '#FF5733' }}
         title="Go to home page"
         type="outline"
         onPress={() => navigation.navigate("Home")}

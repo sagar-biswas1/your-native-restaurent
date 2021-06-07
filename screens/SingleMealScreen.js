@@ -24,20 +24,57 @@ export default function SingleMealScreen({ navigation, route }) {
           uri: product.strMealThumb,
         }}
         style={{
-          width: 160,
-          height: 160,
-          marginRight: "10px",
+          width: '95%',
+          height: 300,
+          margin: '10px',
           resizeMode: "cover",
-          padding: 5,
+          // padding: 5,
+          borderRadius: '10PX'
         }}
       />
-      <Text>{product.strMeal}</Text>
-      <Text>Category : {product.strCategory}</Text>
-      <Text>Cuisine: {product.strArea}</Text>
-      <Text>Price: ${Math.floor(Math.random() * 200) + 50}</Text>
-      <Text>Description:</Text>
-      <Text>{product.strInstructions}</Text>
+      <Text style={{
+        textAlign: "center",
+        fontWeight: '600',
+        marginBottom: '15px',
+        fontSize: '18px'
+      }}>{product.strMeal}</Text>
+
+      <Text style={{
+        fontWeight: '600',
+        marginStart: '15px',
+
+      }}>Category : {product.strCategory}</Text>
+
+      <Text style={{
+        fontWeight: '600',
+        marginStart: '15px'
+      }}>Cuisine: {product.strArea}</Text>
+
+      <Text style={{
+        fontWeight: '600',
+        marginStart: '15px'
+      }}>Price: ${Math.floor(Math.random() * 200) + 50}</Text>
+
+      <Text style={{
+        fontWeight: '600',
+        marginStart: '15px'
+      }}>Description:</Text>
+
+      <Text style={{
+        fontWeight: '600',
+        marginStart: '15px',
+        marginRight: '10px',
+        marginBottom: '50px',
+        color: '#402B13'
+      }}>{product.strInstructions}</Text>
+
+
+
       <Button
+        style={{
+          padding: '20px',
+
+        }}
         title="Place Order"
         onPress={() => {
           dispatch(placeOrder(product.idMeal));
